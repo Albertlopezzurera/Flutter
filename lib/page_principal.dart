@@ -15,7 +15,7 @@ class PrincipalPage extends StatelessWidget {
     user = credentials.user;
     gender = credentials.gender;
     _createDatabase();
-    DBHelper dbHelper = DBHelper();
+    DBHelperRecipes dbHelper = DBHelperRecipes();
     //METODO DE LA BASE DE DATOS PARA RECIBIR TODAS LAS RECETAS
     Future<List<Recipes>> listAllRecipes = dbHelper.getAllRecipes();
     return Scaffold(
@@ -50,7 +50,8 @@ class PrincipalPage extends StatelessWidget {
                         children: <Widget>[
                           InkWell(
                             onTap: () {
-                              Navigator.of(context).pushNamed("specificRecipe", arguments: snapshot.data![index].id);
+                              int recipeId = snapshot.data![index].id;
+                              Navigator.of(context).pushNamed("specificRecipe", arguments: recipeId);
                             },
                             child: Container(
                               padding: EdgeInsets.all(1.0), // RELLENO
@@ -172,7 +173,7 @@ class PrincipalPage extends StatelessWidget {
 
   Future<void> _createDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
-    final dbHelper = DBHelper();
+    final dbHelper = DBHelperRecipes();
     await dbHelper.initDatabase();
   }
 }

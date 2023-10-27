@@ -17,7 +17,7 @@ class _CreateRecipesPageState extends State<CreateRecipesPage> {
   final List<String> listRecipeSteps = [];
   XFile? photo;
   String imgPath = "";
-  DBHelper dbHelper = DBHelper();
+  DBHelperRecipes dbHelper = DBHelperRecipes();
   late String user;
   final nameRecipeController = TextEditingController();
   final timeToCreateController = TextEditingController();
@@ -31,6 +31,18 @@ class _CreateRecipesPageState extends State<CreateRecipesPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.greenAccent,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add, size: 50,),
+            onPressed: (){
+              if (photo == null){
+                imgPath = "assets/defecto_receta.jpeg";
+                setState(() {});
+              }
+              _validationRecipe(context,user,nameRecipeController,timeToCreateController, listOfIngredients, listRecipeSteps);
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -147,16 +159,6 @@ class _CreateRecipesPageState extends State<CreateRecipesPage> {
             ],
           ),
         ),
-      ),
-      floatingActionButton: IconButton(
-        icon: Icon(Icons.next_plan_rounded, size: 50,),
-        onPressed: (){
-          if (photo == null){
-            imgPath = "assets/defecto_receta.jpeg";
-            setState(() {});
-          }
-          _validationRecipe(context,user,nameRecipeController,timeToCreateController, listOfIngredients, listRecipeSteps);
-        },
       ),
     );
   }

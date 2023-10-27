@@ -27,4 +27,14 @@ class User {
       'gender' : gender,
     };
   }
+  
+  Map<String, dynamic> toMap() {
+    return {
+      'username': username,
+      'password': password,
+      'email': email,
+      'age': age,
+      'gender': gender,
+    };
+  }
 }

@@ -3,13 +3,14 @@ import 'package:path/path.dart';
 
 import 'class_recipes.dart';
 
-class DBHelper {
-  static final DBHelper _instance = DBHelper._internal();
-  factory DBHelper() => _instance;
+class DBHelperRecipes {
+  static final DBHelperRecipes _instance = DBHelperRecipes._internal();
+  factory DBHelperRecipes() => _instance;
 
-  DBHelper._internal();
+  DBHelperRecipes._internal();
 
   Database? _database;
+
 
   Future<Database?> get database async {
     if (_database != null) return _database;
@@ -45,7 +46,7 @@ class DBHelper {
   }
 
   Future<void> printRecipesFromDatabase() async {
-    final dbHelper = DBHelper(); // Reemplaza con tu propia instancia de DBHelper
+    final dbHelper = DBHelperRecipes(); // Reemplaza con tu propia instancia de DBHelper
 
     final database = await dbHelper.database;
     final List<Map<String, dynamic>> recipes = await database!.query('recipes');

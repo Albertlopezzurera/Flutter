@@ -4,21 +4,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SpecificRecipe extends StatefulWidget {
+  int recipeId;
+  SpecificRecipe({required this.recipeId});
   @override
   _SpecificRecipeState createState() => _SpecificRecipeState();
 }
 
 class _SpecificRecipeState extends State<SpecificRecipe> {
-  late final int id;
-  DBHelper dbHelper = DBHelper();
-  //METODO DE LA BASE DE DATOS PARA RECIBIR TODAS LAS RECETAS
+  DBHelperRecipes dbHelper = DBHelperRecipes();
+  bool isFavorite = false;
+
   @override
   Widget build(BuildContext context) {
-    id = ModalRoute.of(context)?.settings.arguments as int;
-    Future<List<Recipes>> recipeID = dbHelper.getRecipeID(id);
+    Future<List<Recipes>> recipeID = dbHelper.getRecipeID(widget.recipeId);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
+        actions: [
+          IconButton(onPressed: (){
+            addFavoriteRecipe();
+            },
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: isFavorite ? Colors.red : null, // Cambia el color si es favorito
+            ),
+          )
+        ],
       ),
       body: FutureBuilder<List<Recipes>>(
         future: recipeID,
@@ -34,6 +45,7 @@ class _SpecificRecipeState extends State<SpecificRecipe> {
                   snapshot.data![0].name,
                   style: TextStyle(fontSize: 30.0, color: Colors.blueAccent),
                 ),
+                SizedBox(height: 10,),
                 Expanded(
                   child: ListView.builder(
                     itemCount: snapshot.data!.length,
@@ -111,5 +123,11 @@ class _SpecificRecipeState extends State<SpecificRecipe> {
         },
       ),
     );
+  }
+
+  void addFavoriteRecipe() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
   }
 }

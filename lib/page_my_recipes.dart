@@ -15,7 +15,7 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
   Widget build(BuildContext context) {
     UserCredentials credentials = context.watch<UserCredentials>();
     String username = credentials.user;
-    DBHelper dbHelper = DBHelper();
+    DBHelperRecipes dbHelper = DBHelperRecipes();
     //METODO DE LA BASE DE DATOS PARA RECIBIR LAS RECETAS SOBRE UN USUARIO CONCRETO
     Future<List<Recipes>> listRecipesUsername = dbHelper.getRecipesForUsername(username);
 

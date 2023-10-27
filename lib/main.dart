@@ -1,3 +1,4 @@
+import 'package:cook_books_course/database_user.dart';
 import 'package:cook_books_course/page_create_recipes.dart';
 import 'package:cook_books_course/class_credentials.dart';
 import 'package:cook_books_course/page_my_recipes.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'page_login.dart';
 
-void main() {
+ main() {
   runApp(
     ChangeNotifierProvider<UserCredentials>(
       create: (context) => UserCredentials(user: '', password: '', gender: ''),
@@ -28,7 +29,10 @@ void main() {
           "createRecipe": (BuildContext context) => CreateRecipesPage(),
           "myRecipes": (BuildContext context) => MyRecipesPage(),
           "settings" : (BuildContext context) => SettingPage(),
-          "specificRecipe" : (BuildContext context) => SpecificRecipe(),
+          "specificRecipe": (BuildContext context) {
+            return SpecificRecipe(recipeId: ModalRoute.of(context)!.settings.arguments as int);
+          },
+
         },
       ),
     ),
