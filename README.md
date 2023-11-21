@@ -1,6 +1,6 @@
-# cook_books_course
+# COOK RECIPES
 
-A new project example
+Personal project for mobile, made in flutter. The application consists of having a local database and registered users who can upload their recipes.
 
 ## Getting Started
 
