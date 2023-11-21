@@ -107,6 +107,7 @@ class _LoginPageAppState extends State<LoginPageApp> {
       for (User userDB in listAllUsers) {
          if (userDB.username == user && userDB.password == password) {
           result = 1;
+          gender = userDB.gender;
         }
       }
       if (result == 1) {

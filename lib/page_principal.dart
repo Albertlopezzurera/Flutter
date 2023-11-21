@@ -112,7 +112,7 @@ class PrincipalPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset('assets/female.jpg'),
+                Image.asset('assets/'+gender+'.jpg'),
                 Text(
                   user,
                   style: TextStyle(
